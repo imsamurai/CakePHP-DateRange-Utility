@@ -1,0 +1,31 @@
+{
+  "name": "imsamurai/daterange",
+  "description": "Utility for manage datetime range",
+  "type": "cakephp-plugin",
+  "keywords": [
+    "cakephp",
+    "datetime",
+    "plugin"
+  ],
+  "homepage": "http://github.com/imsamurai/CakePHP-DateRange-Utility",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Shamray Alexander",
+      "email": "im.samuray@gmail.com",
+      "homepage": "https://imsamurai.me",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "composer/installers": "*"
+  },
+  "support": {
+    "email": "im.samuray@gmail.com",
+    "issues": "https://github.com/imsamurai/CakePHP-DateRange-Utility/issues",
+    "source": "https://github.com/imsamurai/CakePHP-DateRange-Utility"
+  },
+  "extra": {
+    "installer-name": "DateRange"
+  }
+}
