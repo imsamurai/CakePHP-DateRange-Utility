@@ -19,14 +19,14 @@ class DateRange {
 	 *
 	 * @var DateTime
 	 */
-	private $_startDate = null;
+	protected $_startDate = null;
 
 	/**
 	 * End date
 	 *
 	 * @var DateTime
 	 */
-	private $_endDate = null;
+	protected $_endDate = null;
 
 	/**
 	 * Constructor
@@ -34,12 +34,12 @@ class DateRange {
 	 * @param DateTime|string|int $start Start date
 	 * @param DateTime|string|int $end End date
 	 *
-	 * @trows InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct($start, $end) {
 		if ($start instanceof DateTime) {
 			$this->_startDate = clone $start;
-		} else if (!is_numeric($start)) {
+		} elseif (!is_numeric($start)) {
 			$this->_startDate = new DateTime($start);
 		} else {
 			$this->_startDate = new DateTime();
@@ -48,7 +48,7 @@ class DateRange {
 
 		if ($end instanceof DateTime) {
 			$this->_endDate = clone $end;
-		} else if (!is_numeric($end)) {
+		} elseif (!is_numeric($end)) {
 			$this->_endDate = new DateTime($end);
 		} else {
 			$this->_endDate = new DateTime();
