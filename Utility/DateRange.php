@@ -36,7 +36,7 @@ class DateRange {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct($start, $end) {
+	public function __construct($start, $end = null) {
 		if ($start instanceof DateTime) {
 			$this->_startDate = clone $start;
 		} elseif (!is_numeric($start)) {
@@ -46,7 +46,10 @@ class DateRange {
 			$this->_startDate->setTimestamp($start);
 		}
 
-		if ($end instanceof DateTime) {
+		if (is_null($end)) {
+			$this->_endDate = clone $this->_startDate;
+			$this->_endDate->setTime(23, 59, 59);
+		} elseif ($end instanceof DateTime) {
 			$this->_endDate = clone $end;
 		} elseif (!is_numeric($end)) {
 			$this->_endDate = new DateTime($end);
@@ -105,8 +108,12 @@ class DateRange {
 	 * @return DatePeriod
 	 */
 	public function period($time) {
+		$endDate = $this->end();
+		if (!defined('HHVM_VERSION')) {
+			$endDate->modify('+1 second');
+		}
 		return new DatePeriod(
-				$this->_startDate, DateInterval::createFromDateString($time), $this->_endDate
+				$this->_startDate, DateInterval::createFromDateString($time), $endDate
 		);
 	}
 

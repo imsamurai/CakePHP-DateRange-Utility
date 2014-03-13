@@ -19,11 +19,8 @@ class AllDateRangeTest extends PHPUnit_Framework_TestSuite {
 	 */
 	public static function suite() {
 		$suite = new CakeTestSuite('All DateRange Tests');
-		/*
-		  $basePath = App::pluginPath('DateRange') . 'Test' . DS . 'Case' . DS;
-		  $suite->addTestDirectoryRecursive($basePath);
-		 */
-		debug('Need to write tests!');
+		$basePath = App::pluginPath('DateRange') . 'Test' . DS . 'Case' . DS;
+		$suite->addTestDirectoryRecursive($basePath);
 		return $suite;
 	}
 
