@@ -116,5 +116,19 @@ class DateRange {
 				$this->_startDate, DateInterval::createFromDateString($time), $endDate
 		);
 	}
+	
+	/**
+	 * Returns true if $Date belongs to this range
+	 * 
+	 * @param DateTime $Date Checked date
+	 * @param bool $inclusive True means include range edges
+	 */
+	public function isContains(DateTime $Date, $inclusive = true) {
+		if ($inclusive) {
+			return $this->_startDate <= $Date && $Date <= $this->_endDate;
+		} else {
+			return $this->_startDate < $Date && $Date < $this->_endDate;
+		}
+	}
 
 }

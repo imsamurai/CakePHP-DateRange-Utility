@@ -35,7 +35,7 @@ class DateRangeTest extends CakeTestCase {
 		}
 		$this->assertEqual($count, count($dates));
 	}
-	
+
 	/**
 	 * Data provider for testPeriod
 	 * 
@@ -95,7 +95,7 @@ class DateRangeTest extends CakeTestCase {
 			),
 		);
 	}
-	
+
 	/**
 	 * Test date range construct
 	 * 
@@ -111,7 +111,7 @@ class DateRangeTest extends CakeTestCase {
 		$this->assertEquals($ExpectedStart, $DateRange->start());
 		$this->assertEquals($ExpectedEnd, $DateRange->end());
 	}
-	
+
 	/**
 	 * Data provider for testConstruct
 	 * 
@@ -157,7 +157,7 @@ class DateRangeTest extends CakeTestCase {
 			),
 		);
 	}
-	
+
 	/**
 	 * Test exception when end date greater than start date
 	 */
@@ -165,7 +165,7 @@ class DateRangeTest extends CakeTestCase {
 		$this->expectException('InvalidArgumentException');
 		new DateRange('12.03.2005', '12.03.2004');
 	}
-	
+
 	/**
 	 * Test data formatting
 	 */
@@ -176,6 +176,89 @@ class DateRangeTest extends CakeTestCase {
 		$format = 'm.d.Y H:i:s';
 		$this->assertSame($Start->format($format), $DateRange->startFormat($format));
 		$this->assertSame($End->format($format), $DateRange->endFormat($format));
+	}
+
+	/**
+	 * Test method that checks if date contains in range
+	 * 
+	 * @param string $start
+	 * @param string $end
+	 * @param string $date
+	 * @param bool $inclusive
+	 * @param bool $contains
+	 * 
+	 * @dataProvider isContainsProvider
+	 */
+	public function testIsContains($start, $end, $date, $inclusive, $contains) {
+		$DateRange = new DateRange($start, $end);
+		$this->assertSame($contains, $DateRange->isContains(new DateTime($date), $inclusive));
+	}
+
+	/**
+	 * Data provider for testIsContains
+	 * 
+	 * @return array
+	 */
+	public function isContainsProvider() {
+		return array(
+			//$start, $end, $date, $inclusive, $contains
+			//set #0
+			array(
+				'12.03.2004',
+				'12.03.2005',
+				'12.07.2004',
+				true,
+				true
+			),
+			//set #1
+			array(
+				'12.03.2004',
+				'12.03.2005',
+				'12.07.2007',
+				true,
+				false
+			),
+			//set #2
+			array(
+				'12.03.2004',
+				'12.03.2005',
+				'12.07.2007',
+				false,
+				false
+			),
+			//set #3
+			array(
+				'12.03.2004',
+				'12.03.2005',
+				'12.03.2004',
+				false,
+				false
+			),
+			//set #4
+			array(
+				'12.03.2004',
+				'12.03.2005',
+				'12.03.2004',
+				true,
+				true
+			),
+			//set #5
+			array(
+				'12.03.2004',
+				'12.03.2005',
+				'12.03.2005',
+				false,
+				false
+			),
+			//set #6
+			array(
+				'12.03.2004',
+				'12.03.2005',
+				'12.03.2005',
+				true,
+				true
+			),
+		);
 	}
 
 }
