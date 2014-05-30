@@ -101,22 +101,21 @@ class DateRange {
 	}
 
 	/**
-	 * Create DatePeriod object for given interval $time
-	 * See http://ua2.php.net/manual/en/class.dateperiod.php
+	 * CreateIterator for given interval $time
 	 *
-	 * @param string $time See http://ua2.php.net/manual/en/dateinterval.createfromdatestring.php
-	 * @return DatePeriod
+	 * @param string $time
+	 * @return ArrayIterator
 	 */
 	public function period($time) {
-		$endDate = $this->end();
-		if (!defined('HHVM_VERSION')) {
-			$endDate->modify('+1 second');
+		$Dates = array();
+		$NextDate = $this->start();
+		while ($NextDate <= $this->_endDate) {
+			$Dates[] = clone $NextDate;
+			$NextDate->modify("+$time");
 		}
-		return new DatePeriod(
-				$this->_startDate, DateInterval::createFromDateString($time), $endDate
-		);
+		return new ArrayIterator($Dates);
 	}
-	
+
 	/**
 	 * Returns true if $Date belongs to this range
 	 * 
