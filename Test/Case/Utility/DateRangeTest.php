@@ -10,6 +10,9 @@ App::uses('DateRange', 'DateRange.Utility');
 
 /**
  * DateRangeTest
+ * 
+ * @package DateRangeTest
+ * @subpackage Utility
  */
 class DateRangeTest extends CakeTestCase {
 

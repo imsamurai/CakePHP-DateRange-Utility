@@ -9,6 +9,9 @@
 
 /**
  * AllDateRangeTest
+ * 
+ * @package DateRangeTest
+ * @subpackage Test
  */
 class AllDateRangeTest extends PHPUnit_Framework_TestSuite {
 
